@@ -5,6 +5,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { CierreCTA } from "@/components/sections/CierreCTA";
 import { faq } from "@/content/faq";
 import { faqLd, jsonLdScript } from "@/lib/jsonld";
+import { PageTransition } from "@/components/ui/PageTransition";
 
 export const metadata: Metadata = {
   title: "Preguntas frecuentes",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function PreguntasPage() {
   return (
-    <>
+    <PageTransition>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(faqLd(faq))} />
       <PageIntro
         eyebrow="Preguntas frecuentes"
@@ -32,6 +33,6 @@ export default function PreguntasPage() {
         title="¿Te quedó alguna duda?"
         lead="Pregunta por WhatsApp: te responde Alejo mismo."
       />
-    </>
+    </PageTransition>
   );
 }

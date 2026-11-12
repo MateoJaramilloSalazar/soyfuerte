@@ -9,10 +9,11 @@ import { CierreCTA } from "@/components/sections/CierreCTA";
 import { Marquee } from "@/components/ui/Marquee";
 import { supportPhrases } from "@/content/site";
 import { jsonLdScript, localBusinessLd } from "@/lib/jsonld";
+import { PageTransition } from "@/components/ui/PageTransition";
 
 export default function Home() {
   return (
-    <>
+    <PageTransition>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(localBusinessLd())} />
       <Hero />
       <Marquee items={supportPhrases} />
@@ -23,6 +24,6 @@ export default function Home() {
       <Testimonios />
       <SobreAlejo />
       <CierreCTA />
-    </>
+    </PageTransition>
   );
 }

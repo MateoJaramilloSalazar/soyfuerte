@@ -13,6 +13,8 @@ type MediaPlaceholderProps = {
   sizes?: string;
   /** Contenido superpuesto (p. ej. botón de play del video). */
   children?: React.ReactNode;
+  /** Precargar la imagen (solo la que está arriba del pliegue, p. ej. el póster del hero). */
+  priority?: boolean;
 };
 
 /**
@@ -26,6 +28,7 @@ export function MediaPlaceholder({
   refSrc,
   sizes = "(min-width: 768px) 40vw, 100vw",
   children,
+  priority = false,
 }: MediaPlaceholderProps) {
   return (
     <div
@@ -41,7 +44,7 @@ export function MediaPlaceholder({
     >
       {refSrc ? (
         <>
-          <Image src={refSrc} alt="" fill sizes={sizes} className="object-cover" />
+          <Image src={refSrc} alt="" fill sizes={sizes} preload={priority} className="object-cover" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-sf-black/80 via-sf-black/10 to-transparent" />
         </>
       ) : (

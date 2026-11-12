@@ -1,65 +1,64 @@
 import { Play } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { Section } from "@/components/ui/Section";
-import { Bolt } from "@/components/brand/Bolt";
+import { Reveal } from "@/components/ui/Reveal";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { BoltDraw } from "@/components/brand/BoltDraw";
 import { refImage } from "@/lib/referencias";
 import { site } from "@/content/site";
 import { waMessages } from "@/lib/whatsapp";
 
 /**
  * Hero del Inicio.
- * PENDIENTE (fase de movimiento): rayo que se dibuja y se enciende; frase palabra por palabra.
- * PENDIENTE (contenido): video de presentación (60–90 s) con póster de Alejo.
+ * - "CRÉETELO. ENTRÉNALO. VÍVELO." entra palabra por palabra con golpe seco (CSS: .hero-word).
+ * - El rayo del logo se dibuja sobre el póster y se enciende (BoltDraw).
+ * PENDIENTE (contenido): video de presentación (60–90 s); hoy el póster es una imagen temporal.
  */
 export function Hero() {
   const poster = refImage("heroPoster");
+  const words = site.taglineWords;
   return (
     <Section size="hero" className="overflow-hidden" aria-labelledby="hero-title">
       <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
         <div>
           <p className="type-eyebrow eyebrow-mark text-sf-white">Entrenamiento personal · Medellín</p>
           <h1 id="hero-title" className="type-display-xl mt-4 text-sf-white">
-            {site.taglineWords.map((word, i) => (
+            {words.map((word, i) => (
               <span
                 key={word}
-                className={["block", i === site.taglineWords.length - 1 ? "text-sf-red" : ""].join(" ")}
+                style={{ ["--i" as string]: i }}
+                className={["hero-word", i === words.length - 1 ? "text-sf-red" : ""].join(" ")}
               >
                 {word}
               </span>
             ))}
           </h1>
-          <p className="type-lead mt-8 max-w-[34rem] text-pretty">{site.description}</p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <CTAButton action={{ type: "contact", message: waMessages.consulta, origin: "hero" }}>
-              Escríbeme
-            </CTAButton>
-            <CTAButton action={{ type: "link", href: "/planes" }} variant="secondary">
-              Ver planes
-            </CTAButton>
-          </div>
+          <Reveal delay={0.85}>
+            <p className="type-lead mt-8 max-w-[34rem] text-pretty">{site.description}</p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <CTAButton action={{ type: "contact", message: waMessages.consulta, origin: "hero" }}>
+                Escríbeme
+              </CTAButton>
+              <CTAButton action={{ type: "link", href: "/planes" }} variant="secondary">
+                Ver planes
+              </CTAButton>
+            </div>
+          </Reveal>
         </div>
 
         {/* Espacio del video reservado en 16:9 (sin saltos de layout). */}
         <figure className="relative">
-          {poster ? (
-            <MediaPlaceholder label="Video de presentación" ratio="16/9" refSrc={poster} sizes="(min-width: 1024px) 45vw, 100vw">
-              <PlayBadge />
-            </MediaPlaceholder>
-          ) : (
-            <div
-              role="img"
-              aria-label="Video de presentación de Alejo (próximamente)"
-              className="relative flex aspect-video items-center justify-center overflow-hidden rounded-md border border-sf-line bg-sf-surface"
-            >
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-[radial-gradient(90%_90%_at_0%_100%,rgba(224,47,52,0.35),transparent_60%)]"
-              />
-              <Bolt className="absolute -right-6 -bottom-10 h-[130%] w-auto text-sf-red opacity-20" />
-              <PlayBadge />
-            </div>
-          )}
+          <MediaPlaceholder
+            label="Video de presentación"
+            ratio="16/9"
+            refSrc={poster}
+            priority
+            sizes="(min-width: 1024px) 45vw, 100vw"
+          >
+            <PlayBadge />
+          </MediaPlaceholder>
+          {/* Rayo que se dibuja y se enciende, montado sobre el borde del póster */}
+          <BoltDraw className="pointer-events-none absolute -top-10 -right-4 h-[78%] w-auto md:-right-8" delay={0.6} />
           <figcaption className="type-small mt-3 text-sf-muted">
             Conoce a Alejo · video de presentación (próximamente)
           </figcaption>
@@ -73,7 +72,7 @@ function PlayBadge() {
   return (
     <span
       aria-hidden="true"
-      className="relative flex size-16 items-center justify-center rounded-pill border-2 border-sf-white/80 bg-sf-black/30 text-sf-white backdrop-blur-sm"
+      className="relative flex size-16 items-center justify-center rounded-pill border-2 border-sf-white/80 bg-sf-black/30 text-sf-white backdrop-blur-sm transition-transform duration-200 ease-sf"
     >
       <Play className="ml-1 size-7" />
     </span>

@@ -1,6 +1,9 @@
 "use client";
 
-import { useId, useState } from "react";
+import { motion } from "motion/react";
+import { useId, useState, type PointerEvent } from "react";
+import { DigitRoll } from "@/components/ui/DigitRoll";
+import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { BulletList } from "@/components/ui/BulletList";
 import {
@@ -12,6 +15,7 @@ import {
   type Plan,
 } from "@/content/planes";
 import { formatCOP } from "@/lib/format";
+import { canHoverFinely, EASE_SF } from "@/lib/motion";
 import { waMessages } from "@/lib/whatsapp";
 
 type PlanesSelectorProps = {
@@ -21,7 +25,8 @@ type PlanesSelectorProps = {
 
 /**
  * Interruptor Presencial / Virtual + 3 tarjetas de plan.
- * PENDIENTE (fase de movimiento): animación de layout del interruptor y rueda de dígitos en precios.
+ * Movimiento: el interruptor desliza su píldora (layout), los precios ruedan como odómetro
+ * y en escritorio un brillo rojo sigue al cursor sobre las tarjetas.
  */
 export function PlanesSelector({ origin }: PlanesSelectorProps) {
   const [modalidad, setModalidad] = useState<Modalidad>("presencial");
@@ -30,13 +35,13 @@ export function PlanesSelector({ origin }: PlanesSelectorProps) {
     <div className="flex flex-col gap-10">
       <ModalidadSwitch value={modalidad} onChange={setModalidad} />
 
-      <ul className="grid gap-6 md:grid-cols-3 md:items-stretch">
+      <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3 md:items-stretch">
         {planes.map((plan) => (
-          <li key={plan.id} className="flex">
+          <RevealItem as="li" key={plan.id} className="flex">
             <PlanCard plan={plan} modalidad={modalidad} origin={origin} />
-          </li>
+          </RevealItem>
         ))}
-      </ul>
+      </RevealGroup>
     </div>
   );
 }
@@ -49,6 +54,7 @@ function ModalidadSwitch({
   onChange: (m: Modalidad) => void;
 }) {
   const name = useId();
+  const pillId = useId();
   return (
     <fieldset className="flex flex-col items-start gap-3">
       <legend className="sr-only">Modalidad de entrenamiento</legend>
@@ -63,17 +69,41 @@ function ModalidadSwitch({
               onChange={() => onChange(m)}
               className="peer sr-only"
             />
-            <span className="type-button block rounded-pill px-5 py-3 text-sf-text transition-colors duration-150 peer-checked:bg-sf-white peer-checked:text-sf-black peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sf-red hover:text-sf-white peer-checked:hover:text-sf-black">
+            {value === m ? (
+              <motion.span
+                layoutId={pillId}
+                aria-hidden="true"
+                className="absolute inset-0 rounded-pill bg-sf-white"
+                transition={{ type: "spring", stiffness: 500, damping: 38 }}
+              />
+            ) : null}
+            <span className="type-button relative block rounded-pill px-5 py-3 text-sf-text transition-colors duration-200 peer-checked:text-sf-black peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sf-red hover:text-sf-white peer-checked:hover:text-sf-black">
               {modalidades[m].label}
             </span>
           </label>
         ))}
       </div>
-      <p className="type-small text-sf-muted" aria-live="polite">
+      <motion.p
+        key={value}
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, ease: EASE_SF }}
+        className="type-small text-sf-muted"
+        aria-live="polite"
+      >
         {modalidades[value].detail}
-      </p>
+      </motion.p>
     </fieldset>
   );
+}
+
+/** Brillo rojo que sigue al cursor (solo escritorio con mouse; actualiza variables CSS, sin re-render). */
+function onGlowMove(e: PointerEvent<HTMLElement>) {
+  if (e.pointerType !== "mouse" || !canHoverFinely()) return;
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  el.style.setProperty("--my", `${e.clientY - r.top}px`);
 }
 
 function PlanCard({ plan, modalidad, origin }: { plan: Plan; modalidad: Modalidad; origin: string }) {
@@ -83,8 +113,9 @@ function PlanCard({ plan, modalidad, origin }: { plan: Plan; modalidad: Modalida
 
   return (
     <article
+      onPointerMove={onGlowMove}
       className={[
-        "relative flex w-full flex-col gap-5 rounded-md bg-sf-surface p-6 md:p-8",
+        "card-glow flex w-full flex-col gap-5 rounded-md bg-sf-surface p-6 md:p-8",
         featured ? "border-2 border-sf-red shadow-glow-red" : "border border-sf-line",
       ].join(" ")}
     >
@@ -100,7 +131,7 @@ function PlanCard({ plan, modalidad, origin }: { plan: Plan; modalidad: Modalida
       </div>
 
       <p className="type-price whitespace-nowrap text-sf-white">
-        {formatCOP(price)}{" "}
+        <DigitRoll value={formatCOP(price)} />{" "}
         <span className="type-small font-normal not-italic text-sf-muted [font-variation-settings:normal]">
           / mes
         </span>

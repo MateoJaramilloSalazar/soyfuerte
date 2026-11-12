@@ -237,7 +237,7 @@ body {
   font-style: italic;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  --wdth: 90;
+  /* --wdth lo hereda del contenedor (Marquee lo anima con la velocidad del scroll) */
   font-variation-settings: "wdth" var(--wdth);
 }
 
@@ -315,6 +315,137 @@ body {
   color: transparent;
 }
 
+/* ---------- Movimiento ---------- */
+
+/*
+ * --wdth registrada como número para que se pueda interpolar (transiciones y keyframes):
+ * es el eje de ancho de Saira que leen todas las clases type-*.
+ */
+@property --wdth {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 100;
+}
+
+/*
+ * Hero: "CRÉETELO. ENTRÉNALO. VÍVELO." palabra por palabra, con golpe seco (como batería):
+ * escala 1.15 → 1, opacidad, desenfoque breve y la letra se estira (wdth 62 → 75, wght 600 → 700).
+ * Es CSS puro para que corra desde el primer pintado, sin esperar a JavaScript (no retrasa el LCP).
+ */
+@keyframes sf-hit {
+  0% {
+    opacity: 0;
+    transform: scale(1.15);
+    filter: blur(6px);
+    --wdth: 62;
+    font-weight: 600;
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+    --wdth: 75;
+    font-weight: 700;
+  }
+}
+
+@utility hero-word {
+  display: block;
+  transform-origin: left center;
+  font-variation-settings: "wdth" var(--wdth);
+  animation: sf-hit 420ms var(--sf-ease) both;
+  animation-delay: calc(120ms + var(--i, 0) * 260ms);
+}
+
+/* Botones: la letra se ensancha al pasar el cursor (wdth 100 → 110) */
+@utility btn-stretch {
+  transition-property: transform, box-shadow, background-color, border-color, color, --wdth;
+}
+
+/* Tarjetas de planes: brillo rojo que sigue al cursor (--mx/--my los pone JS) */
+@utility card-glow {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms var(--sf-ease);
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 0%),
+      rgba(224, 47, 52, 0.22),
+      transparent 60%
+    );
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Indicador "escribiendo…" de WhatsApp */
+@keyframes sf-dot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes sf-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- View Transitions entre páginas ---------- */
+
+/* El contenido nuevo entra con un barrido en diagonal (la inclinación del logo) */
+@keyframes sf-sweep-in {
+  from {
+    clip-path: polygon(0 0, 0 0, -16% 100%, -16% 100%);
+  }
+  to {
+    clip-path: polygon(0 0, 116% 0, 100% 100%, -16% 100%);
+  }
+}
+
+@keyframes sf-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+::view-transition-new(.sf-sweep-in) {
+  animation: sf-sweep-in 520ms var(--sf-ease) both;
+}
+
+::view-transition-old(.sf-fade-out) {
+  animation: sf-fade-out 260ms ease-in both;
+}
+
+/* Títulos compartidos entre páginas: se transforman de uno a otro */
+::view-transition-group(.sf-morph) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--sf-ease);
+}
+
 /* Pulso del botón flotante: un latido corto y luego reposo */
 @keyframes sf-pulse {
   0% {
@@ -328,19 +459,15 @@ body {
   }
 }
 
-/* Marquee: el contenido va duplicado, así que -50% cierra el bucle */
-@keyframes sf-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 /* ---------- Movimiento reducido ---------- */
 
 @media (prefers-reduced-motion: reduce) {
+  /* Hero: solo fundido */
+  .hero-word {
+    animation-name: sf-fade !important;
+    animation-duration: 300ms !important;
+  }
+
   ::view-transition-old(*),
   ::view-transition-new(*),
   ::view-transition-group(*) {

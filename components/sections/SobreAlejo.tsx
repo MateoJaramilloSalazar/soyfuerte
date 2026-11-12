@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BulletList } from "@/components/ui/BulletList";
 import { alejo } from "@/content/site";
 import { refImage } from "@/lib/referencias";
+import { Reveal } from "@/components/ui/Reveal";
 
 /** Inicio: "Quién es Alejo" — foto, contadores, 3 líneas y enlace a /sobre-alejo. */
 export function SobreAlejo() {
@@ -13,7 +14,9 @@ export function SobreAlejo() {
     <Section aria-labelledby="alejo-title">
       <div className="grid items-center gap-12 md:grid-cols-[0.9fr_1.1fr]">
         {/* PLACEHOLDER: foto de Alejo en alto contraste, luz lateral roja. */}
+        <Reveal className="max-w-md">
         <MediaPlaceholder label="Foto de Alejo" ratio="4/5" className="max-w-md" refSrc={refImage("alejo")} />
+        </Reveal>
 
         <div>
           <SectionHeading id="alejo-title" eyebrow={alejo.role} title="Quién es Alejo" />

@@ -20,6 +20,8 @@ import {
 } from "@/content/planes";
 import { formatCOP, formatMonthly } from "@/lib/format";
 import { waMessages } from "@/lib/whatsapp";
+import { PageTransition } from "@/components/ui/PageTransition";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Planes y tarifas",
@@ -32,7 +34,7 @@ const lugarIcon = { Parques: Trees, "Tu casa": Home, Gimnasio: Dumbbell } as con
 
 export default function PlanesPage() {
   return (
-    <>
+    <PageTransition>
       <PageIntro
         eyebrow="Planes"
         title="Planes y tarifas"
@@ -46,7 +48,7 @@ export default function PlanesPage() {
 
       {/* Consulta valorativa */}
       <Section aria-labelledby="consulta-title">
-        <div className="grid gap-8 rounded-md border border-sf-line bg-sf-surface p-6 md:grid-cols-[1.4fr_1fr] md:items-center md:p-10">
+        <Reveal className="grid gap-8 rounded-md border border-sf-line bg-sf-surface p-6 md:grid-cols-[1.4fr_1fr] md:items-center md:p-10">
           <div>
             <p className="type-eyebrow flex items-center gap-2 text-sf-white [&_svg]:text-sf-red">
               <Video aria-hidden="true" className="size-4" /> Paso 1 · Créetelo
@@ -65,13 +67,13 @@ export default function PlanesPage() {
               Agenda tu consulta
             </CTAButton>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       {/* Pareja + referidos */}
       <Section aria-label="Pareja y referidos">
-        <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-          <div className="flex flex-col gap-6 rounded-md border border-sf-line bg-sf-surface p-6 md:p-8">
+        <RevealGroup className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+          <RevealItem className="flex flex-col gap-6 rounded-md border border-sf-line bg-sf-surface p-6 md:p-8">
             <p className="type-eyebrow flex items-center gap-2 text-sf-white [&_svg]:text-sf-red">
               <Users aria-hidden="true" className="size-4" /> {Math.round(pareja.discount * 100)}% de descuento c/u
             </p>
@@ -105,9 +107,9 @@ export default function PlanesPage() {
             >
               Queremos entrenar juntos
             </CTAButton>
-          </div>
+          </RevealItem>
 
-          <div className="flex flex-col gap-6 rounded-md border border-sf-line bg-sf-surface p-6 md:p-8">
+          <RevealItem className="flex flex-col gap-6 rounded-md border border-sf-line bg-sf-surface p-6 md:p-8">
             <p className="type-eyebrow flex items-center gap-2 text-sf-white [&_svg]:text-sf-red">
               <Gift aria-hidden="true" className="size-4" /> Referidos
             </p>
@@ -115,8 +117,8 @@ export default function PlanesPage() {
             <p className="type-price text-sf-white">{formatCOP(referidos.bonus)}</p>
             <p className="type-body">{referidos.body}</p>
             <p className="type-small text-sf-muted">{referidos.note}</p>
-          </div>
-        </div>
+          </RevealItem>
+        </RevealGroup>
       </Section>
 
       {/* Dónde entrenamos + cobertura */}
@@ -127,20 +129,20 @@ export default function PlanesPage() {
           title="Dónde entrenamos"
           lead="Presencial en el Valle de Aburrá; virtual desde donde estés."
         />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-3">
+        <RevealGroup as="ul" className="mt-10 grid gap-4 sm:grid-cols-3">
           {dondeEntrenamos.map((lugar) => {
             const Icon = lugarIcon[lugar.title];
             return (
-              <li key={lugar.title} className="flex gap-4 rounded-md border border-sf-line p-6">
+              <RevealItem as="li" key={lugar.title} className="flex gap-4 rounded-md border border-sf-line p-6">
                 <Icon aria-hidden="true" className="size-6 shrink-0 text-sf-red" />
                 <div>
                   <h3 className="type-h3 text-sf-white">{lugar.title}</h3>
                   <p className="type-small mt-1">{lugar.body}</p>
                 </div>
-              </li>
+              </RevealItem>
             );
           })}
-        </ul>
+        </RevealGroup>
 
         <h3 className="type-h2 mt-16 text-sf-white">Cobertura</h3>
         <p className="type-body mt-2 mb-8 max-w-prose">
@@ -152,18 +154,18 @@ export default function PlanesPage() {
       {/* Reglas */}
       <Section aria-labelledby="reglas-title">
         <SectionHeading id="reglas-title" eyebrow="Sin letra pequeña" title="Reglas del servicio" />
-        <ol className="mt-10 grid gap-4 md:grid-cols-2">
+        <RevealGroup as="ol" className="mt-10 grid gap-4 md:grid-cols-2">
           {reglas.map((regla, i) => (
-            <li key={regla} className="flex gap-4 rounded-md border border-sf-line p-6">
+            <RevealItem as="li" key={regla} className="flex gap-4 rounded-md border border-sf-line p-6">
               <span className="type-h2 text-sf-red tabular-nums">{i + 1}</span>
               <p className="type-body">{regla}</p>
-            </li>
+            </RevealItem>
           ))}
-        </ol>
+        </RevealGroup>
         <p className="type-small mt-6 text-sf-muted">{sessionInfo.gymNote}</p>
       </Section>
 
       <CierreCTA origin="planes-cierre" />
-    </>
+    </PageTransition>
   );
 }

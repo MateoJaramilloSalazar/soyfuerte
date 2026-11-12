@@ -8,6 +8,8 @@ import { CierreCTA } from "@/components/sections/CierreCTA";
 import { metodo, noIncluye } from "@/content/site";
 import { sessionInfo } from "@/content/planes";
 import { waMessages } from "@/lib/whatsapp";
+import { PageTransition } from "@/components/ui/PageTransition";
+import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "El método",
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function MetodoPage() {
   return (
-    <>
+    <PageTransition>
       <PageIntro
         eyebrow="Método SoyFuerte"
         title="Créetelo. Entrénalo. Vívelo."
@@ -31,9 +33,10 @@ export default function MetodoPage() {
 
       {/* Las 3 etapas en detalle */}
       <Section aria-label="Etapas del método" className="pt-0!">
-        <ol className="flex flex-col gap-6">
+        <RevealGroup as="ol" className="flex flex-col gap-6">
           {metodo.map((etapa, i) => (
-            <li
+            <RevealItem
+              as="li"
               key={etapa.id}
               className="grid gap-6 rounded-md border border-sf-line bg-sf-surface p-6 md:grid-cols-[auto_1fr] md:gap-12 md:p-10"
             >
@@ -46,9 +49,9 @@ export default function MetodoPage() {
                 <p className="type-h3 mt-2 text-sf-text">{etapa.title}</p>
                 <p className="type-lead mt-4 max-w-prose">{etapa.body}</p>
               </div>
-            </li>
+            </RevealItem>
           ))}
-        </ol>
+        </RevealGroup>
       </Section>
 
       {/* Qué incluye / qué no */}
@@ -59,8 +62,8 @@ export default function MetodoPage() {
           title="Qué incluye cada plan"
           lead="Todos los planes incluyen lo mismo; cambia cuántos días a la semana entrenas con Alejo."
         />
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <div className="rounded-md border border-sf-line bg-sf-surface p-6 md:p-8">
+        <RevealGroup className="mt-10 grid gap-6 md:grid-cols-2">
+          <RevealItem className="rounded-md border border-sf-line bg-sf-surface p-6 md:p-8">
             <h3 className="type-h3 text-sf-white">Incluye</h3>
             <ul className="mt-6 flex flex-col gap-4">
               {[`Sesiones de ${sessionInfo.minutes} minutos con días y horas fijos`, ...sessionInfo.includes].map(
@@ -72,8 +75,8 @@ export default function MetodoPage() {
                 ),
               )}
             </ul>
-          </div>
-          <div className="rounded-md border border-sf-line p-6 md:p-8">
+          </RevealItem>
+          <RevealItem className="rounded-md border border-sf-line p-6 md:p-8">
             <h3 className="type-h3 text-sf-white">No incluye</h3>
             <ul className="mt-6 flex flex-col gap-4">
               {noIncluye.map((item) => (
@@ -83,8 +86,8 @@ export default function MetodoPage() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </RevealItem>
+        </RevealGroup>
       </Section>
 
       <CierreCTA
@@ -92,6 +95,6 @@ export default function MetodoPage() {
         title="Empieza por la consulta."
         lead="Es virtual y se abona a tu primera mensualidad si tomas un plan en los 7 días siguientes."
       />
-    </>
+    </PageTransition>
   );
 }

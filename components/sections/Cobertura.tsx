@@ -1,16 +1,18 @@
 import { MapPin } from "lucide-react";
 import { cobertura, coberturaEjemplo } from "@/content/planes";
 import { formatCOP } from "@/lib/format";
+import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 /** Cobertura presencial por zonas, con su recargo de movilización. */
 export function Cobertura() {
   return (
     <div className="flex flex-col gap-6">
-      <ul className="grid gap-4 md:grid-cols-3">
+      <RevealGroup as="ul" className="grid gap-4 md:grid-cols-3">
         {cobertura.map((zona) => {
           const incluida = zona.surchargePerWeekday === 0;
           return (
-            <li
+            <RevealItem
+              as="li"
               key={zona.id}
               className={[
                 "flex flex-col gap-4 rounded-md bg-sf-surface p-6",
@@ -25,10 +27,10 @@ export function Cobertura() {
               <p className="type-eyebrow mt-auto text-sf-white">
                 {incluida ? "Sin recargo" : `+${formatCOP(zona.surchargePerWeekday)} / mes por cada día semanal`}
               </p>
-            </li>
+            </RevealItem>
           );
         })}
-      </ul>
+      </RevealGroup>
       <p className="type-small text-sf-muted">{coberturaEjemplo}</p>
     </div>
   );

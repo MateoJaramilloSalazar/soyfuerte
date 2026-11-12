@@ -1,5 +1,6 @@
 import { Plus } from "lucide-react";
 import type { FAQ as FAQItem } from "@/content/faq";
+import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 type FAQProps = {
   items: FAQItem[];
@@ -11,9 +12,10 @@ type FAQProps = {
  */
 export function FAQ({ items }: FAQProps) {
   return (
-    <div className="divide-y divide-sf-line border-y border-sf-line">
+    <RevealGroup className="divide-y divide-sf-line border-y border-sf-line">
       {items.map((item) => (
-        <details key={item.id} id={item.id} className="group">
+        <RevealItem key={item.id} y={12}>
+        <details id={item.id} className="group">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 [&::-webkit-details-marker]:hidden">
             <h3 className="type-h3 text-sf-white">{item.q}</h3>
             <Plus
@@ -23,7 +25,8 @@ export function FAQ({ items }: FAQProps) {
           </summary>
           <p className="type-body max-w-prose pb-6">{item.a}</p>
         </details>
+        </RevealItem>
       ))}
-    </div>
+    </RevealGroup>
   );
 }

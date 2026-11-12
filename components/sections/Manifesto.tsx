@@ -1,29 +1,21 @@
-import { Section } from "@/components/ui/Section";
+import { DiagonalBand } from "@/components/ui/Diagonal";
+import { ManifestoLine } from "@/components/sections/ManifestoLine";
 import { manifesto } from "@/content/site";
 
 /**
- * Manifiesto, línea por línea, en Barlow Light (liviano).
- * Solo la última línea ("Soy fuerte. Y tú también.") va en Saira roja.
- * PENDIENTE (fase de movimiento): cada línea entra con el scroll.
+ * Manifiesto en una franja diagonal. Cada línea se enciende con el scroll (Barlow Light);
+ * la última ("Soy fuerte. Y tú también.") va en Saira roja y se expande.
  */
 export function Manifesto() {
   const last = manifesto.length - 1;
   return (
-    <Section aria-label="Manifiesto">
+    <DiagonalBand aria-label="Manifiesto">
       <p className="type-eyebrow eyebrow-mark text-sf-white">Manifiesto</p>
       <div className="mt-8 flex max-w-3xl flex-col gap-4 md:gap-5">
-        {manifesto.map((line, i) =>
-          i === last ? (
-            <p key={line} className="type-h1 mt-4 text-sf-red">
-              {line}
-            </p>
-          ) : (
-            <p key={line} className="type-manifesto text-pretty text-sf-white">
-              {line}
-            </p>
-          ),
-        )}
+        {manifesto.map((line, i) => (
+          <ManifestoLine key={line} text={line} final={i === last} />
+        ))}
       </div>
-    </Section>
+    </DiagonalBand>
   );
 }

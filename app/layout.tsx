@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
+import { ScrollDepth } from "@/components/ui/ScrollDepth";
 import { site } from "@/content/site";
 import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
@@ -69,11 +70,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Saltar al contenido
         </a>
         <Header />
+        {/* Espacio del header fijo (alto expandido: h-20 / md:h-24) */}
+        <div aria-hidden="true" className="h-20 shrink-0 md:h-24" />
         <main id="contenido" className="flex-1">
           {children}
         </main>
         <Footer />
         <WhatsAppFloat />
+        <ScrollDepth />
         <Analytics />
       </body>
     </html>

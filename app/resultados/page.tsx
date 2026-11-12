@@ -5,6 +5,7 @@ import { WhatsAppBubble } from "@/components/sections/WhatsAppBubble";
 import { CierreCTA } from "@/components/sections/CierreCTA";
 import { Logo } from "@/components/brand/Logo";
 import { testimonios } from "@/content/testimonios";
+import { PageTransition } from "@/components/ui/PageTransition";
 
 export const metadata: Metadata = {
   title: "Resultados",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function ResultadosPage() {
   return (
-    <>
+    <PageTransition>
       <PageIntro
         eyebrow="Resultados"
         title="Lo que nos escriben"
@@ -34,9 +35,9 @@ export default function ResultadosPage() {
             </div>
           </div>
           <ul className="flex flex-col gap-4 px-4 py-6 md:px-6">
-            {testimonios.map((t) => (
+            {testimonios.map((t, i) => (
               <li key={t.id}>
-                <WhatsAppBubble testimonio={t} />
+                <WhatsAppBubble testimonio={t} stagger={i < 4 ? i * 1.1 : 0} />
               </li>
             ))}
           </ul>
@@ -44,6 +45,6 @@ export default function ResultadosPage() {
       </Section>
 
       <CierreCTA origin="resultados-cierre" title="El próximo mensaje puede ser el tuyo." />
-    </>
+    </PageTransition>
   );
 }
