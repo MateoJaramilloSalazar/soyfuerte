@@ -4,11 +4,10 @@ import { PageIntro } from "@/components/ui/PageIntro";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Counter } from "@/components/ui/Counter";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Photo } from "@/components/ui/Photo";
 import { CierreCTA } from "@/components/sections/CierreCTA";
 import { alejo, valores } from "@/content/site";
 import { jsonLdScript, personLd } from "@/lib/jsonld";
-import { refImage } from "@/lib/referencias";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
@@ -26,8 +25,7 @@ export default function SobreAlejoPage() {
 
       <Section aria-label="Historia" className="pt-0!">
         <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:items-start">
-          {/* PLACEHOLDER: retrato en alto contraste, luz lateral roja. */}
-          <MediaPlaceholder label="Retrato de Alejo" ratio="4/5" className="md:sticky md:top-28" refSrc={refImage("alejo")} />
+              <Photo foto="portrait" ratio="4/5" className="md:sticky md:top-28" position="center top" preload />
           <div>
             <div className="flex flex-wrap gap-10">
               <Counter value={alejo.years} label="Años entrenando" />
@@ -60,12 +58,18 @@ export default function SobreAlejoPage() {
         </RevealGroup>
       </Section>
 
-      {/* PLACEHOLDER: fotos de Alejo con clientes, en alto contraste. */}
+      {/* Galería: Alejo con clientes en la ciudad, en el gimnasio y en el parque */}
       <Section aria-label="Fotos">
         <RevealGroup className="grid gap-4 sm:grid-cols-3">
-          <MediaPlaceholder label="Entrenando con clientes" ratio="4/5" refSrc={refImage("conClientes")} sizes="(min-width: 640px) 33vw, 100vw" />
-          <MediaPlaceholder label="Sesión a domicilio" ratio="4/5" refSrc={refImage("domicilio")} sizes="(min-width: 640px) 33vw, 100vw" />
-          <MediaPlaceholder label="Sesión virtual" ratio="4/5" refSrc={refImage("virtual")} sizes="(min-width: 640px) 33vw, 100vw" />
+          <RevealItem>
+            <Photo foto="train1" ratio="4/5" position="65% center" sizes="(min-width: 640px) 33vw, 100vw" />
+          </RevealItem>
+          <RevealItem>
+            <Photo foto="red" ratio="4/5" position="center top" sizes="(min-width: 640px) 33vw, 100vw" />
+          </RevealItem>
+          <RevealItem>
+            <Photo foto="train2" ratio="4/5" position="60% center" sizes="(min-width: 640px) 33vw, 100vw" />
+          </RevealItem>
         </RevealGroup>
       </Section>
 
