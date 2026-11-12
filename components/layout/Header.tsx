@@ -35,9 +35,10 @@ export function Header() {
         <div className="flex items-center gap-3">
           <CTAButton
             action={{ type: "contact", message: waMessages.consulta, origin: "header" }}
-            className="hidden px-4 py-3 sm:inline-flex"
+            size="sm"
+            className="hidden sm:inline-flex"
           >
-            Escríbele a Alejo
+            Escríbeme
           </CTAButton>
           <MobileNav />
         </div>

@@ -1,8 +1,17 @@
 /**
- * URL pública del sitio: https://soyfuerte.co.
- * NEXT_PUBLIC_SITE_URL permite sobrescribirla (p. ej. en local o en previews).
+ * URL pública del sitio, en este orden:
+ * 1. NEXT_PUBLIC_SITE_URL, si se define a mano.
+ * 2. VERCEL_PROJECT_PRODUCTION_URL: la variable de sistema de Vercel con el dominio de
+ *    producción. Hoy es el *.vercel.app; cuando se agregue soyfuerte.co en Vercel
+ *    pasa a ser ese, sin tocar código.
+ * 3. https://soyfuerte.co (dominio final; fuera de Vercel o en local).
  */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://soyfuerte.co").replace(/\/$/, "");
+const vercelProd = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (vercelProd ? `https://${vercelProd}` : "https://soyfuerte.co")
+).replace(/\/$/, "");
 
 export const routes = [
   { path: "/", priority: 1 },

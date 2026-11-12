@@ -7,8 +7,14 @@ import { resolveCTA, type CTAAction } from "@/lib/cta";
 
 type Variant = "primary" | "secondary";
 
+const sizes = {
+  md: "px-6 py-4",
+  /** Compacto: header y espacios reducidos. */
+  sm: "px-4 py-2.5 text-[0.8125rem]",
+} as const;
+
 const base =
-  "type-button inline-flex items-center justify-center gap-2 rounded-sm border-2 px-6 py-4 " +
+  "type-button inline-flex items-center justify-center gap-2 rounded-sm border-2 " +
   "transition-[transform,box-shadow,background-color,border-color,color,font-variation-settings] " +
   "duration-150 ease-sf motion-reduce:transition-none";
 
@@ -24,6 +30,7 @@ type CTAButtonProps = {
   action: CTAAction;
   children: ReactNode;
   variant?: Variant;
+  size?: keyof typeof sizes;
   className?: string;
   icon?: ReactNode;
 };
@@ -33,9 +40,9 @@ type CTAButtonProps = {
  * Las secciones declaran la intención (contacto + mensaje + origen); el destino
  * (WhatsApp hoy, /agenda en la etapa 2) se resuelve aquí.
  */
-export function CTAButton({ action, children, variant = "primary", className, icon }: CTAButtonProps) {
+export function CTAButton({ action, children, variant = "primary", size = "md", className, icon }: CTAButtonProps) {
   const { href, external } = resolveCTA(action);
-  const classes = [base, variants[variant], className].filter(Boolean).join(" ");
+  const classes = [base, sizes[size], variants[variant], className].filter(Boolean).join(" ");
 
   if (external) {
     return (
