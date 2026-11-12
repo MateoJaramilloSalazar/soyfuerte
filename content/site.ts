@@ -43,7 +43,30 @@ export const alejo = {
   education: "Estudios en Actividad Física y Deporte (Universidad Católica Luis Amigó)",
   languages: ["Español", "Inglés"],
   traits: ["Disciplina", "Liderazgo", "Trato directo y transparente"],
+  /** Tres líneas para la sección "Quién es Alejo" del Inicio. */
+  summary: [
+    "Más de 9 años entrenando personas, en grupo y una a una.",
+    "Directo, transparente y sin promesas milagrosas: te dice las cosas como son.",
+    "La disciplina es su sello. Él es el primero en cumplir lo que te pide.",
+  ],
+  /** Historia corta para /sobre-alejo. Nunca "profesional", "licenciado" ni "graduado". */
+  story: [
+    "Alejo lleva más de 9 años en el entrenamiento personal, grupal e individual. En ese camino ha acompañado a más de 200 personas: gente que volvía a empezar, gente sin tiempo y gente que no se creía capaz.",
+    "Estudió Actividad Física y Deporte en la Universidad Católica Luis Amigó, pero lo que más lo define es la disciplina: es el primer ejemplo de la constancia que te pide.",
+    "Es noble y directo. Exige sin humillar, acompaña sin juzgar y te dice las cosas como son, con objetivos y tiempos reales. Fan del metal y del rock: la energía la pone él; la fuerza, tú.",
+    "Creó SoyFuerte con una idea: la fuerza no empieza en el músculo, empieza en reconocerse fuerte. Cada sesión es una prueba más de que sí se puede.",
+  ],
+  languageNote: "Atiende en español e inglés.",
 } as const;
+
+/** Valores de marca (/sobre-alejo). */
+export const valores = [
+  { name: "Convicción", body: "Todo empieza por creer que se puede." },
+  { name: "Disciplina", body: "La fuerza se construye día a día, sin excusas." },
+  { name: "Transparencia", body: "Objetivos y tiempos reales, sin promesas milagrosas." },
+  { name: "Nobleza", body: "Cada persona es un proceso único y se acompaña sin juicio." },
+  { name: "Superación", body: "Cada sesión es una prueba de que se puede un poco más." },
+] as const;
 
 /** Las 3 etapas del método (usan la frase de marca). */
 export const metodo = [

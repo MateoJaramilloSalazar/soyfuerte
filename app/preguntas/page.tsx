@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/ui/PageIntro";
+import { Section } from "@/components/ui/Section";
+import { FAQ } from "@/components/sections/FAQ";
+import { CierreCTA } from "@/components/sections/CierreCTA";
+import { faq } from "@/content/faq";
+import { faqLd, jsonLdScript } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Preguntas frecuentes",
@@ -10,10 +15,23 @@ export const metadata: Metadata = {
 
 export default function PreguntasPage() {
   return (
-    <PageIntro
-      eyebrow="Preguntas frecuentes"
-      title="Lo que más nos preguntan"
-      lead="Respuestas claras, sin letra pequeña."
-    />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(faqLd(faq))} />
+      <PageIntro
+        eyebrow="Preguntas frecuentes"
+        title="Lo que más nos preguntan"
+        lead="Respuestas claras, sin letra pequeña."
+      />
+      <Section aria-label="Preguntas" className="pt-0!">
+        <div className="max-w-3xl">
+          <FAQ items={faq} />
+        </div>
+      </Section>
+      <CierreCTA
+        origin="preguntas-cierre"
+        title="¿Te quedó alguna duda?"
+        lead="Escríbele a Alejo por WhatsApp y te responde él mismo."
+      />
+    </>
   );
 }

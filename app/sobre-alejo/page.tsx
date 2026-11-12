@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Languages } from "lucide-react";
 import { PageIntro } from "@/components/ui/PageIntro";
-import { alejo } from "@/content/site";
+import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Counter } from "@/components/ui/Counter";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { CierreCTA } from "@/components/sections/CierreCTA";
+import { alejo, valores } from "@/content/site";
+import { jsonLdScript, personLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Sobre Alejo",
@@ -10,10 +17,56 @@ export const metadata: Metadata = {
 
 export default function SobreAlejoPage() {
   return (
-    <PageIntro
-      eyebrow={alejo.role}
-      title="Alejo Jaramillo"
-      lead={`Más de ${alejo.years} años en entrenamiento personal y más de ${alejo.people} personas acompañadas. La disciplina es su sello. Atiende en español e inglés.`}
-    />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(personLd())} />
+      <PageIntro eyebrow={alejo.role} title="Alejo Jaramillo" lead="Intenso por dentro, noble por fuera." />
+
+      <Section aria-label="Historia" className="pt-0!">
+        <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+          {/* PLACEHOLDER: retrato en alto contraste, luz lateral roja. */}
+          <MediaPlaceholder label="Retrato de Alejo" ratio="4/5" className="md:sticky md:top-28" />
+          <div>
+            <div className="flex flex-wrap gap-10">
+              <Counter value={alejo.years} label="Años entrenando" />
+              <Counter value={alejo.people} label="Personas acompañadas" />
+            </div>
+            <div className="mt-10 flex flex-col gap-5">
+              {alejo.story.map((p) => (
+                <p key={p} className="type-lead text-pretty">
+                  {p}
+                </p>
+              ))}
+            </div>
+            <p className="type-eyebrow mt-10 flex items-center gap-2 text-sf-white">
+              <Languages aria-hidden="true" className="size-5 text-sf-orange" />
+              {alejo.languageNote}
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      <Section aria-labelledby="valores-title">
+        <SectionHeading id="valores-title" eyebrow="Lo que lo mueve" title="Sus valores" />
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {valores.map((v) => (
+            <li key={v.name} className="rounded-md border border-sf-line bg-sf-surface p-6">
+              <h3 className="type-h3 text-sf-white">{v.name}</h3>
+              <p className="type-small mt-3">{v.body}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* PLACEHOLDER: fotos de Alejo con clientes, en alto contraste. */}
+      <Section aria-label="Fotos">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <MediaPlaceholder label="Entrenando en el parque" ratio="4/5" />
+          <MediaPlaceholder label="Sesión a domicilio" ratio="4/5" />
+          <MediaPlaceholder label="Sesión virtual" ratio="4/5" />
+        </div>
+      </Section>
+
+      <CierreCTA origin="alejo-cierre" />
+    </>
   );
 }

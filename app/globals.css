@@ -297,6 +297,16 @@ body {
   }
 }
 
+/* Marquee: el contenido va duplicado, así que -50% cierra el bucle */
+@keyframes sf-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* ---------- Movimiento reducido ---------- */
 
 @media (prefers-reduced-motion: reduce) {
