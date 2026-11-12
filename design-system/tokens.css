@@ -1,0 +1,52 @@
+/* SoyFuerte — tokens generados desde tokens.json */
+
+@font-face { font-family: 'Saira'; src: url('./fonts/Saira-Variable.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-stretch: 50% 125%; font-display: swap; }
+@font-face { font-family: 'Saira'; src: url('./fonts/Saira-Italic-Variable.ttf') format('truetype'); font-weight: 100 900; font-style: italic; font-stretch: 50% 125%; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('./fonts/Inter-Variable.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-stretch: 50% 125%; font-display: swap; }
+
+:root {
+  --black: #0e0e0e;
+  --black-raised: #1a1a1a;
+  --red: #e02f34;
+  --red-deep: #8e1b1f;
+  --orange: #ff6a13;
+  --white: #ffffff;
+  --text-body: rgba(255, 255, 255, 0.82);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --line: rgba(255, 255, 255, 0.12);
+  --wa-bubble: #202c33;
+  --wa-check: #53bdeb;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-bubble: 16px;
+  --radius-pill: 999px;
+  --glow-red: 0 0 32px rgba(224, 47, 52, 0.45);
+  --glow-orange: 0 0 24px rgba(255, 106, 19, 0.5);
+  --lift: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --angle-diagonal: -8deg;
+  --font-display: Saira, "Arial Narrow", sans-serif;
+  --font-text: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.display-xl { font-family: var(--font-display); font-size: 104px; line-height: 0.9; font-weight: 700; font-style: italic; font-variation-settings: "wdth" 75; text-transform: uppercase; }}
+.display-l { font-family: var(--font-display); font-size: 72px; line-height: 0.92; font-weight: 700; font-style: italic; font-variation-settings: "wdth" 75; text-transform: uppercase; }}
+.h1 { font-family: var(--font-display); font-size: 56px; line-height: 0.95; font-weight: 700; font-style: italic; font-variation-settings: "wdth" 80; text-transform: uppercase; }}
+.h2 { font-family: var(--font-display); font-size: 40px; line-height: 1; font-weight: 700; font-style: italic; font-variation-settings: "wdth" 85; text-transform: uppercase; }}
+.h3 { font-family: var(--font-display); font-size: 26px; line-height: 1.1; font-weight: 600; font-variation-settings: "wdth" 87.5; text-transform: uppercase; }}
+.title-spaced { font-family: var(--font-display); font-size: 16px; line-height: 1.3; font-weight: 600; letter-spacing: 0.3em; font-variation-settings: "wdth" 100; text-transform: uppercase; }}
+.eyebrow { font-family: var(--font-display); font-size: 14px; line-height: 1.4; font-weight: 600; letter-spacing: 0.16em; font-variation-settings: "wdth" 100; text-transform: uppercase; }}
+.lead { font-family: var(--font-text); font-size: 20px; line-height: 1.6; font-weight: 400; }}
+.body { font-family: var(--font-text); font-size: 17px; line-height: 1.65; font-weight: 400; }}
+.small { font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 400; }}
+.button { font-family: var(--font-display); font-size: 16px; line-height: 1; font-weight: 700; letter-spacing: 0.08em; font-variation-settings: "wdth" 100; text-transform: uppercase; }}
+.price { font-family: var(--font-display); font-size: 42px; line-height: 1; font-weight: 700; letter-spacing: 0; font-style: italic; font-variation-settings: "wdth" 87.5; font-variant-numeric: tabular-nums; }}

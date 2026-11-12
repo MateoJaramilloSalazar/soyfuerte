@@ -1,0 +1,313 @@
+@import "tailwindcss";
+
+/*
+ * SoyFuerte — tokens de marca.
+ * Valores tomados de design-system/tokens.json (fuente de verdad).
+ * No se importa design-system/tokens.css directamente porque:
+ *  - sus clases tipográficas cierran con "}}" (CSS mal formado),
+ *  - declara @font-face con TTF locales que duplicarían las fuentes de next/font.
+ * Las fuentes las carga next/font en app/layout.tsx (--font-saira, --font-inter).
+ */
+
+:root {
+  /* Paleta de marca: 5 colores */
+  --sf-black: #0e0e0e;
+  --sf-red: #e02f34;
+  --sf-red-deep: #8e1b1f;
+  --sf-orange: #ff6a13;
+  --sf-white: #ffffff;
+
+  /* Variaciones del negro y del blanco (no son colores nuevos) */
+  --sf-surface: #1a1a1a; /* black-raised */
+  --sf-text: rgba(255, 255, 255, 0.82); /* text-body */
+  --sf-muted: rgba(255, 255, 255, 0.6); /* text-muted */
+  --sf-line: rgba(255, 255, 255, 0.12);
+
+  /* Solo para testimonios estilo WhatsApp */
+  --sf-wa-bubble: #202c33;
+  --sf-wa-check: #53bdeb;
+
+  /* Degradado de energía: rojo profundo → rojo → naranja */
+  --sf-energy: linear-gradient(
+    120deg,
+    var(--sf-red-deep),
+    var(--sf-red) 55%,
+    var(--sf-orange)
+  );
+
+  /* Sombras y brillos */
+  --sf-glow-red: 0 0 32px rgba(224, 47, 52, 0.45);
+  --sf-glow-orange: 0 0 24px rgba(255, 106, 19, 0.5);
+  --sf-lift: 0 12px 32px rgba(0, 0, 0, 0.5);
+
+  /* Inclinación del logo para diagonales */
+  --sf-angle: -8deg;
+
+  /* Curva de movimiento: entra con golpe y se asienta */
+  --sf-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Ritmo vertical de secciones */
+  --sf-section-y: 64px;
+  --sf-section-y-hero: 96px;
+
+  color-scheme: dark;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --sf-section-y: 96px;
+    --sf-section-y-hero: 128px;
+  }
+}
+
+@theme inline {
+  /* Colores → bg-sf-black, text-sf-red, border-sf-line… */
+  --color-sf-black: var(--sf-black);
+  --color-sf-red: var(--sf-red);
+  --color-sf-red-deep: var(--sf-red-deep);
+  --color-sf-orange: var(--sf-orange);
+  --color-sf-white: var(--sf-white);
+  --color-sf-surface: var(--sf-surface);
+  --color-sf-text: var(--sf-text);
+  --color-sf-muted: var(--sf-muted);
+  --color-sf-line: var(--sf-line);
+  --color-sf-wa-bubble: var(--sf-wa-bubble);
+  --color-sf-wa-check: var(--sf-wa-check);
+
+  /* Familias */
+  --font-display: var(--font-saira), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Radios */
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-bubble: 16px;
+  --radius-pill: 999px;
+
+  /* Sombras */
+  --shadow-glow-red: var(--sf-glow-red);
+  --shadow-glow-orange: var(--sf-glow-orange);
+  --shadow-lift: var(--sf-lift);
+
+  --ease-sf: var(--sf-ease);
+
+  /* Ancho de contenido y de texto */
+  --container-content: 1200px;
+  --container-prose: 68ch;
+}
+
+/*
+ * Espaciado: Tailwind usa 4px por unidad (p-1 = 4px … p-32 = 128px),
+ * que coincide con la escala space-1…space-32 del design system.
+ */
+
+/* ---------- Base ---------- */
+
+html {
+  background: var(--sf-black);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--sf-black);
+  color: var(--sf-text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--sf-red);
+  color: var(--sf-white);
+}
+
+/* Foco visible en rojo (§8) */
+:focus-visible {
+  outline: 2px solid var(--sf-red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Tipografía (escala del design system) ----------
+ * Títulos en Saira: el ancho va en la variable --wdth para poder animarlo
+ * (Motion anima la variable; font-variation-settings la lee).
+ */
+
+@utility type-display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 1.6rem + 7vw, 6.5rem); /* 52 → 104px */
+  line-height: 0.9;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  --wdth: 75;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-display-l {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 1.5rem + 4.5vw, 4.5rem); /* 40 → 72px */
+  line-height: 0.92;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  --wdth: 75;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.4rem + 3.4vw, 3.5rem); /* 36 → 56px */
+  line-height: 0.95;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  --wdth: 80;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem); /* 30 → 40px */
+  line-height: 1;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  --wdth: 85;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-h3 {
+  font-family: var(--font-display);
+  font-size: 1.625rem; /* 26px */
+  line-height: 1.1;
+  font-weight: 600;
+  text-transform: uppercase;
+  --wdth: 87.5;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-title-spaced {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  --wdth: 100;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  --wdth: 100;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-button {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  --wdth: 100;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-price {
+  font-family: var(--font-display);
+  font-size: 2.625rem; /* 42px */
+  line-height: 1;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  --wdth: 87.5;
+  font-variation-settings: "wdth" var(--wdth);
+}
+
+@utility type-lead {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+@utility type-body {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+@utility type-small {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ---------- Recursos gráficos ---------- */
+
+/* Grano muy sutil sobre secciones oscuras (opacidad ≤ 0.06) */
+@utility grain {
+  position: relative;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+}
+
+/* Texto o fondo con el degradado de energía */
+@utility bg-energy {
+  background-image: var(--sf-energy);
+}
+
+@utility text-energy {
+  background-image: var(--sf-energy);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Pulso del botón flotante: un latido corto y luego reposo */
+@keyframes sf-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  25%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* ---------- Movimiento reducido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
