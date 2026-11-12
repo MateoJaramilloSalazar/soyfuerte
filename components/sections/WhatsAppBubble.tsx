@@ -8,7 +8,7 @@ type WhatsAppBubbleProps = {
 
 /**
  * Testimonio con forma de mensaje de WhatsApp en modo oscuro:
- * inicial en círculo, nombre y zona en orange, mensaje, hora y doble check azul.
+ * inicial en círculo, nombre en blanco y zona en muted, mensaje, hora y doble check azul.
  * PENDIENTE (fase de movimiento): indicador "escribiendo…" y check que se activa.
  */
 export function WhatsAppBubble({ testimonio, className }: WhatsAppBubbleProps) {
@@ -22,7 +22,7 @@ export function WhatsAppBubble({ testimonio, className }: WhatsAppBubbleProps) {
         {nombre.charAt(0)}
       </span>
       <div className="relative max-w-[26rem] rounded-bubble rounded-tl-sm bg-sf-wa-bubble px-4 pt-3 pb-2 text-[0.9375rem] leading-[1.45] text-sf-white">
-        <figcaption className="mb-0.5 text-[0.8125rem] font-bold text-sf-orange">
+        <figcaption className="mb-0.5 text-[0.8125rem] font-bold text-sf-white">
           {nombre} <span className="font-normal text-sf-muted">· {zona}</span>
         </figcaption>
         <blockquote>

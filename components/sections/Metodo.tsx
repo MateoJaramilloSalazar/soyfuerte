@@ -25,7 +25,7 @@ export function Metodo({ showLink = true }: MetodoProps) {
         {showLink ? (
           <Link
             href="/metodo"
-            className="type-button text-sf-white underline decoration-sf-orange decoration-2 underline-offset-8 hover:text-sf-orange"
+            className="type-button text-sf-white underline decoration-sf-red decoration-2 underline-offset-8"
           >
             Conoce el método
           </Link>
@@ -44,7 +44,7 @@ export function Metodo({ showLink = true }: MetodoProps) {
             >
               0{i + 1}
             </span>
-            <p className="type-eyebrow text-sf-orange">
+            <p className="type-eyebrow eyebrow-mark text-sf-white">
               Paso {i + 1} · {etapa.note}
             </p>
             <h3 className="type-h2 text-sf-white">{etapa.step}</h3>

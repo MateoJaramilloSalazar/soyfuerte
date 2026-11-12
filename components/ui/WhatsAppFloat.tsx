@@ -28,7 +28,7 @@ export function WhatsAppFloat() {
         className="absolute inset-0 rounded-pill bg-sf-red motion-safe:animate-[sf-pulse_4s_var(--sf-ease)_infinite]"
       />
       <MessageCircle className="relative size-6" strokeWidth={2} aria-hidden="true" />
-      <Bolt className="absolute -top-1 -right-1 h-5 w-auto text-sf-orange drop-shadow-[0_0_6px_var(--sf-orange)]" />
+      <Bolt className="absolute -top-1 -right-1 h-5 w-auto text-sf-white" />
     </a>
   );
 }

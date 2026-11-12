@@ -20,7 +20,7 @@ export function Testimonios() {
           title="Lo que nos escriben"
           lead="Mensajes de personas que ya se lo creyeron."
         />
-        <Link href="/resultados" className="type-button text-sf-white underline decoration-sf-orange decoration-2 underline-offset-8 hover:text-sf-orange">
+        <Link href="/resultados" className="type-button text-sf-white underline decoration-sf-red decoration-2 underline-offset-8">
           Ver todos
         </Link>
       </div>

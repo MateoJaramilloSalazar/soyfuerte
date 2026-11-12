@@ -43,3 +43,7 @@ next-env.d.ts
 # references (not part of build)
 .references/
 !.env.example
+
+# Fuente comercial Gotham (Hoefler&Co): requiere licencia web; no subir al repo público
+design-system/fonts/Gotham*
+

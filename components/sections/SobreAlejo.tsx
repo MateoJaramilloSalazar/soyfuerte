@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BulletList } from "@/components/ui/BulletList";
 import { alejo } from "@/content/site";
+import { refImage } from "@/lib/referencias";
 
 /** Inicio: "Quién es Alejo" — foto, contadores, 3 líneas y enlace a /sobre-alejo. */
 export function SobreAlejo() {
@@ -12,7 +13,7 @@ export function SobreAlejo() {
     <Section aria-labelledby="alejo-title">
       <div className="grid items-center gap-12 md:grid-cols-[0.9fr_1.1fr]">
         {/* PLACEHOLDER: foto de Alejo en alto contraste, luz lateral roja. */}
-        <MediaPlaceholder label="Foto de Alejo" ratio="4/5" className="max-w-md" />
+        <MediaPlaceholder label="Foto de Alejo" ratio="4/5" className="max-w-md" refSrc={refImage("alejo")} />
 
         <div>
           <SectionHeading id="alejo-title" eyebrow={alejo.role} title="Quién es Alejo" />
@@ -23,7 +24,7 @@ export function SobreAlejo() {
           <BulletList className="type-body mt-8" items={alejo.summary} />
           <Link
             href="/sobre-alejo"
-            className="type-button mt-10 inline-block text-sf-white underline decoration-sf-orange decoration-2 underline-offset-8 hover:text-sf-orange"
+            className="type-button mt-10 inline-block text-sf-white underline decoration-sf-red decoration-2 underline-offset-8"
           >
             Conoce su historia
           </Link>

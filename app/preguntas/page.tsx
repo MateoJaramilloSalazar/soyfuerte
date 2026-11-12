@@ -30,7 +30,7 @@ export default function PreguntasPage() {
       <CierreCTA
         origin="preguntas-cierre"
         title="¿Te quedó alguna duda?"
-        lead="Escríbele a Alejo por WhatsApp y te responde él mismo."
+        lead="Pregunta por WhatsApp: te responde Alejo mismo."
       />
     </>
   );

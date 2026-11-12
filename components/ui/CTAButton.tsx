@@ -8,9 +8,9 @@ import { resolveCTA, type CTAAction } from "@/lib/cta";
 type Variant = "primary" | "secondary";
 
 const sizes = {
-  md: "px-6 py-4",
+  md: "px-5 py-3",
   /** Compacto: header y espacios reducidos. */
-  sm: "px-4 py-2.5 text-[0.8125rem]",
+  sm: "px-3.5 py-2 text-[0.75rem]",
 } as const;
 
 const base =
@@ -23,7 +23,7 @@ const variants: Record<Variant, string> = {
     "border-transparent bg-sf-red text-sf-white hover:-translate-y-px hover:shadow-glow-red " +
     "hover:[--wdth:110] active:translate-y-0 active:bg-sf-red-deep",
   secondary:
-    "border-sf-white bg-transparent text-sf-white hover:border-sf-orange hover:text-sf-orange",
+    "border-sf-white bg-transparent text-sf-white hover:border-sf-red",
 };
 
 type CTAButtonProps = {

@@ -48,7 +48,7 @@ export default function PlanesPage() {
       <Section aria-labelledby="consulta-title">
         <div className="grid gap-8 rounded-md border border-sf-line bg-sf-surface p-6 md:grid-cols-[1.4fr_1fr] md:items-center md:p-10">
           <div>
-            <p className="type-eyebrow flex items-center gap-2 text-sf-orange">
+            <p className="type-eyebrow flex items-center gap-2 text-sf-white [&_svg]:text-sf-red">
               <Video aria-hidden="true" className="size-4" /> Paso 1 · Créetelo
             </p>
             <h2 id="consulta-title" className="type-h2 mt-2 text-sf-white">
@@ -72,7 +72,7 @@ export default function PlanesPage() {
       <Section aria-label="Pareja y referidos">
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
           <div className="flex flex-col gap-6 rounded-md border border-sf-line bg-sf-surface p-6 md:p-8">
-            <p className="type-eyebrow flex items-center gap-2 text-sf-orange">
+            <p className="type-eyebrow flex items-center gap-2 text-sf-white [&_svg]:text-sf-red">
               <Users aria-hidden="true" className="size-4" /> {Math.round(pareja.discount * 100)}% de descuento c/u
             </p>
             <h2 className="type-h2 text-sf-white">Entrena en pareja</h2>
@@ -108,7 +108,7 @@ export default function PlanesPage() {
           </div>
 
           <div className="flex flex-col gap-6 rounded-md border border-sf-line bg-sf-surface p-6 md:p-8">
-            <p className="type-eyebrow flex items-center gap-2 text-sf-orange">
+            <p className="type-eyebrow flex items-center gap-2 text-sf-white [&_svg]:text-sf-red">
               <Gift aria-hidden="true" className="size-4" /> Referidos
             </p>
             <h2 className="type-h2 text-sf-white">Trae a alguien</h2>
@@ -132,7 +132,7 @@ export default function PlanesPage() {
             const Icon = lugarIcon[lugar.title];
             return (
               <li key={lugar.title} className="flex gap-4 rounded-md border border-sf-line p-6">
-                <Icon aria-hidden="true" className="size-6 shrink-0 text-sf-orange" />
+                <Icon aria-hidden="true" className="size-6 shrink-0 text-sf-red" />
                 <div>
                   <h3 className="type-h3 text-sf-white">{lugar.title}</h3>
                   <p className="type-small mt-1">{lugar.body}</p>
@@ -155,7 +155,7 @@ export default function PlanesPage() {
         <ol className="mt-10 grid gap-4 md:grid-cols-2">
           {reglas.map((regla, i) => (
             <li key={regla} className="flex gap-4 rounded-md border border-sf-line p-6">
-              <span className="type-h2 text-sf-orange tabular-nums">{i + 1}</span>
+              <span className="type-h2 text-sf-red tabular-nums">{i + 1}</span>
               <p className="type-body">{regla}</p>
             </li>
           ))}

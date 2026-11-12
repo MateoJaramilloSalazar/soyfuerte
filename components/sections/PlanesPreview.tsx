@@ -21,7 +21,7 @@ export function PlanesPreview() {
       <p className="type-small mt-8 text-sf-muted">
         ¿Primera vez? Empieza por la consulta valorativa virtual ({formatCOP(consulta.price)}), abonable a tu
         primera mensualidad.{" "}
-        <Link href="/planes" className="text-sf-white underline decoration-sf-orange underline-offset-4 hover:text-sf-orange">
+        <Link href="/planes" className="text-sf-white underline decoration-sf-red underline-offset-4">
           Ver todos los detalles
         </Link>
       </p>

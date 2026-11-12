@@ -95,7 +95,7 @@ function PlanCard({ plan, modalidad, origin }: { plan: Plan; modalidad: Modalida
       ) : null}
 
       <div>
-        <p className="type-eyebrow text-sf-orange">{days}</p>
+        <p className="type-eyebrow eyebrow-mark text-sf-white">{days}</p>
         <h3 className="type-h3 mt-2 text-sf-white">{plan.name}</h3>
       </div>
 

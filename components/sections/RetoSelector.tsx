@@ -38,7 +38,7 @@ export function RetoSelector() {
                 className={[
                   "type-h3 flex items-center justify-between gap-4 rounded-md border px-5 py-4 text-left transition-colors duration-150",
                   active
-                    ? "border-sf-orange bg-sf-surface text-sf-white"
+                    ? "border-sf-red bg-sf-surface text-sf-white"
                     : "border-sf-line text-sf-text hover:border-sf-white hover:text-sf-white",
                 ].join(" ")}
               >
@@ -47,7 +47,7 @@ export function RetoSelector() {
                   aria-hidden="true"
                   className={[
                     "size-2.5 shrink-0 skew-x-[-8deg] transition-colors",
-                    active ? "bg-sf-orange" : "bg-sf-line",
+                    active ? "bg-sf-red" : "bg-sf-line",
                   ].join(" ")}
                 />
               </button>

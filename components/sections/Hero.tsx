@@ -2,6 +2,8 @@ import { Play } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { Section } from "@/components/ui/Section";
 import { Bolt } from "@/components/brand/Bolt";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { refImage } from "@/lib/referencias";
 import { site } from "@/content/site";
 import { waMessages } from "@/lib/whatsapp";
 
@@ -11,11 +13,12 @@ import { waMessages } from "@/lib/whatsapp";
  * PENDIENTE (contenido): video de presentación (60–90 s) con póster de Alejo.
  */
 export function Hero() {
+  const poster = refImage("heroPoster");
   return (
     <Section size="hero" className="overflow-hidden" aria-labelledby="hero-title">
       <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
         <div>
-          <p className="type-eyebrow text-sf-orange">Entrenamiento personal · Medellín</p>
+          <p className="type-eyebrow eyebrow-mark text-sf-white">Entrenamiento personal · Medellín</p>
           <h1 id="hero-title" className="type-display-xl mt-4 text-sf-white">
             {site.taglineWords.map((word, i) => (
               <span
@@ -29,7 +32,7 @@ export function Hero() {
           <p className="type-lead mt-8 max-w-[34rem] text-pretty">{site.description}</p>
           <div className="mt-10 flex flex-wrap gap-4">
             <CTAButton action={{ type: "contact", message: waMessages.consulta, origin: "hero" }}>
-              Escríbele a Alejo
+              Escríbeme
             </CTAButton>
             <CTAButton action={{ type: "link", href: "/planes" }} variant="secondary">
               Ver planes
@@ -39,28 +42,40 @@ export function Hero() {
 
         {/* Espacio del video reservado en 16:9 (sin saltos de layout). */}
         <figure className="relative">
-          <div
-            role="img"
-            aria-label="Video de presentación de Alejo (próximamente)"
-            className="relative flex aspect-video items-center justify-center overflow-hidden rounded-md border border-sf-line bg-sf-surface"
-          >
+          {poster ? (
+            <MediaPlaceholder label="Video de presentación" ratio="16/9" refSrc={poster} sizes="(min-width: 1024px) 45vw, 100vw">
+              <PlayBadge />
+            </MediaPlaceholder>
+          ) : (
             <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(90%_90%_at_0%_100%,rgba(224,47,52,0.35),transparent_60%),radial-gradient(60%_60%_at_100%_0%,rgba(255,106,19,0.12),transparent_70%)]"
-            />
-            <Bolt className="absolute -right-6 -bottom-10 h-[130%] w-auto text-sf-red opacity-20" />
-            <span
-              aria-hidden="true"
-              className="relative flex size-16 items-center justify-center rounded-pill border-2 border-sf-white/70 text-sf-white"
+              role="img"
+              aria-label="Video de presentación de Alejo (próximamente)"
+              className="relative flex aspect-video items-center justify-center overflow-hidden rounded-md border border-sf-line bg-sf-surface"
             >
-              <Play className="ml-1 size-7" />
-            </span>
-          </div>
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-[radial-gradient(90%_90%_at_0%_100%,rgba(224,47,52,0.35),transparent_60%)]"
+              />
+              <Bolt className="absolute -right-6 -bottom-10 h-[130%] w-auto text-sf-red opacity-20" />
+              <PlayBadge />
+            </div>
+          )}
           <figcaption className="type-small mt-3 text-sf-muted">
             Conoce a Alejo · video de presentación (próximamente)
           </figcaption>
         </figure>
       </div>
     </Section>
+  );
+}
+
+function PlayBadge() {
+  return (
+    <span
+      aria-hidden="true"
+      className="relative flex size-16 items-center justify-center rounded-pill border-2 border-sf-white/80 bg-sf-black/30 text-sf-white backdrop-blur-sm"
+    >
+      <Play className="ml-1 size-7" />
+    </span>
   );
 }

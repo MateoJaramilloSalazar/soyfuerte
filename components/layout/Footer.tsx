@@ -14,15 +14,15 @@ export function Footer() {
     <footer className="grain border-t border-sf-line">
       <div className="mx-auto grid w-full max-w-content gap-12 px-4 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
         <div className="flex flex-col items-start gap-6">
-          <Logo className="h-16 w-auto text-sf-red" title="SoyFuerte" />
+          <Logo className="h-24 w-auto text-sf-red md:h-28" title="SoyFuerte" />
           <p className="type-h2 text-sf-white">{site.tagline}</p>
           <CTAButton action={{ type: "contact", message: waMessages.consulta, origin: "footer" }}>
-            Escríbele a Alejo
+            Escríbeme
           </CTAButton>
         </div>
 
         <div className="flex flex-col gap-4">
-          <h2 className="type-eyebrow text-sf-orange">Cobertura</h2>
+          <h2 className="type-eyebrow eyebrow-mark text-sf-white">Cobertura</h2>
           <p className="type-small">
             Presencial en {incluida?.municipios.join(", ")}, sin costo adicional. Otros municipios
             con recargo de movilización.
@@ -31,11 +31,11 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <h2 className="type-eyebrow text-sf-orange">Explora</h2>
+          <h2 className="type-eyebrow eyebrow-mark text-sf-white">Explora</h2>
           <ul className="flex flex-col gap-2">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="type-small text-sf-white hover:text-sf-orange">
+                <Link href={item.href} className="type-small text-sf-white underline-offset-4 decoration-sf-red decoration-2 hover:underline">
                   {item.label}
                 </Link>
               </li>
@@ -51,7 +51,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="flex size-11 items-center justify-center text-sf-white transition-colors duration-150 hover:text-sf-orange"
+                    className="flex size-11 items-center justify-center text-sf-white transition-colors duration-150 hover:text-sf-red"
                   >
                     <InstagramIcon className="size-6" />
                   </a>

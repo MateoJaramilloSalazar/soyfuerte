@@ -19,7 +19,7 @@ export function Cobertura() {
             >
               <div className="flex items-center justify-between gap-4">
                 <h3 className="type-h3 text-sf-white">{zona.name}</h3>
-                <MapPin aria-hidden="true" className="size-5 text-sf-orange" />
+                <MapPin aria-hidden="true" className="size-5 text-sf-red" />
               </div>
               <p className="type-body">{zona.municipios.join(", ")}</p>
               <p className="type-eyebrow mt-auto text-sf-white">

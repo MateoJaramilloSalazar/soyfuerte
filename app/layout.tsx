@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Saira } from "next/font/google";
+import { Barlow, Saira } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -17,11 +17,16 @@ const saira = Saira({
   variable: "--font-saira",
 });
 
-/** Inter variable (texto). */
-const inter = Inter({
+/**
+ * Barlow (texto): reemplaza a Inter por decisión del cliente. Gratuita (Google Fonts, OFL).
+ * No es variable: se cargan solo los pesos que usa el sitio.
+ */
+const barlow = Barlow({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-barlow",
 });
 
 export const metadata: Metadata = {
@@ -55,7 +60,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-CO" className={`${saira.variable} ${inter.variable}`}>
+    <html lang="es-CO" className={`${saira.variable} ${barlow.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#contenido"

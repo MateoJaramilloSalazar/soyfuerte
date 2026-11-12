@@ -8,6 +8,7 @@ import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { CierreCTA } from "@/components/sections/CierreCTA";
 import { alejo, valores } from "@/content/site";
 import { jsonLdScript, personLd } from "@/lib/jsonld";
+import { refImage } from "@/lib/referencias";
 
 export const metadata: Metadata = {
   title: "Sobre Alejo",
@@ -24,7 +25,7 @@ export default function SobreAlejoPage() {
       <Section aria-label="Historia" className="pt-0!">
         <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:items-start">
           {/* PLACEHOLDER: retrato en alto contraste, luz lateral roja. */}
-          <MediaPlaceholder label="Retrato de Alejo" ratio="4/5" className="md:sticky md:top-28" />
+          <MediaPlaceholder label="Retrato de Alejo" ratio="4/5" className="md:sticky md:top-28" refSrc={refImage("alejo")} />
           <div>
             <div className="flex flex-wrap gap-10">
               <Counter value={alejo.years} label="Años entrenando" />
@@ -38,7 +39,7 @@ export default function SobreAlejoPage() {
               ))}
             </div>
             <p className="type-eyebrow mt-10 flex items-center gap-2 text-sf-white">
-              <Languages aria-hidden="true" className="size-5 text-sf-orange" />
+              <Languages aria-hidden="true" className="size-5 text-sf-red" />
               {alejo.languageNote}
             </p>
           </div>
@@ -60,9 +61,9 @@ export default function SobreAlejoPage() {
       {/* PLACEHOLDER: fotos de Alejo con clientes, en alto contraste. */}
       <Section aria-label="Fotos">
         <div className="grid gap-4 sm:grid-cols-3">
-          <MediaPlaceholder label="Entrenando en el parque" ratio="4/5" />
-          <MediaPlaceholder label="Sesión a domicilio" ratio="4/5" />
-          <MediaPlaceholder label="Sesión virtual" ratio="4/5" />
+          <MediaPlaceholder label="Entrenando con clientes" ratio="4/5" refSrc={refImage("conClientes")} sizes="(min-width: 640px) 33vw, 100vw" />
+          <MediaPlaceholder label="Sesión a domicilio" ratio="4/5" refSrc={refImage("domicilio")} sizes="(min-width: 640px) 33vw, 100vw" />
+          <MediaPlaceholder label="Sesión virtual" ratio="4/5" refSrc={refImage("virtual")} sizes="(min-width: 640px) 33vw, 100vw" />
         </div>
       </Section>
 

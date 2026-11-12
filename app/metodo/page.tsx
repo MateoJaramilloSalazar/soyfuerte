@@ -41,7 +41,7 @@ export default function MetodoPage() {
                 0{i + 1}
               </span>
               <div>
-                <p className="type-eyebrow text-sf-orange">{etapa.note}</p>
+                <p className="type-eyebrow eyebrow-mark text-sf-white">{etapa.note}</p>
                 <h2 className="type-h1 mt-2 text-sf-white">{etapa.step}</h2>
                 <p className="type-h3 mt-2 text-sf-text">{etapa.title}</p>
                 <p className="type-lead mt-4 max-w-prose">{etapa.body}</p>
@@ -66,7 +66,7 @@ export default function MetodoPage() {
               {[`Sesiones de ${sessionInfo.minutes} minutos con días y horas fijos`, ...sessionInfo.includes].map(
                 (item) => (
                   <li key={item} className="type-body flex gap-3">
-                    <Check aria-hidden="true" className="mt-1 size-5 shrink-0 text-sf-orange" />
+                    <Check aria-hidden="true" className="mt-1 size-5 shrink-0 text-sf-red" />
                     {item}
                   </li>
                 ),

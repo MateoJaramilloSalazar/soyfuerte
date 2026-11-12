@@ -6,15 +6,15 @@ import { nav } from "@/content/site";
 import { waMessages } from "@/lib/whatsapp";
 
 /**
- * Header global: logo, navegación y CTA "Escríbele a Alejo".
+ * Header global: logo, navegación y CTA "Escríbeme".
  * PENDIENTE (fase de movimiento): compactarse al hacer scroll.
  */
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-sf-line bg-sf-black/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-content items-center justify-between gap-6 px-4 md:h-20 md:px-8">
+      <div className="mx-auto flex h-20 w-full max-w-content items-center justify-between gap-6 px-4 md:h-24 md:px-8">
         <Link href="/" aria-label="SoyFuerte, inicio" className="shrink-0">
-          <Logo className="h-10 w-auto text-sf-red md:h-12" title="SoyFuerte" />
+          <Logo className="h-14 w-auto text-sf-red md:h-[4.5rem]" title="SoyFuerte" />
         </Link>
 
         <nav aria-label="Principal" className="hidden lg:block">
@@ -23,7 +23,7 @@ export function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="type-eyebrow text-sf-white transition-colors duration-150 hover:text-sf-orange"
+                  className="type-eyebrow text-sf-white underline-offset-8 decoration-sf-red decoration-2 hover:underline"
                 >
                   {item.label}
                 </Link>

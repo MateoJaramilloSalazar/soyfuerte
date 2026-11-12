@@ -11,7 +11,7 @@ type SectionHeadingProps = {
   className?: string;
 };
 
-/** Antetítulo (orange) + título (Saira) + lead (Inter). */
+/** Antetítulo (con marca roja) + título (Saira) + lead (Barlow). */
 export function SectionHeading({
   eyebrow,
   title,
@@ -24,7 +24,7 @@ export function SectionHeading({
   const center = align === "center";
   return (
     <div className={[center ? "mx-auto text-center" : "", "max-w-3xl", className].filter(Boolean).join(" ")}>
-      {eyebrow ? <p className="type-eyebrow text-sf-orange">{eyebrow}</p> : null}
+      {eyebrow ? <p className="type-eyebrow eyebrow-mark text-sf-white">{eyebrow}</p> : null}
       <Tag id={id} className={`${Tag === "h1" ? "type-h1" : "type-h2"} mt-2 text-balance text-sf-white`}>
         {title}
       </Tag>
